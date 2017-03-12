@@ -7,7 +7,7 @@ def FileOpen(name):
         f = open(name, 'r')
         return f
     except IOError:
-        print("Error: File does not exist, or is not called " + name)
+        print("Error: " + name + " not found")
         return 0
 
 # Safely read an integer, and discard inputs outside the specified range, or of other data types
@@ -28,7 +28,6 @@ words = []
 f = FileOpen('dictionary.txt')
 guesses_num = integer_in(1, 100, 'Please enter how many guesses the computer should be allowed: ')
 print('The computer will be allowed to have ' + str(guesses_num) + ' guesses.')
-
 
 # Add all words to a list for easier access
 # Don't remove strip, or it will save the newlines to the list
