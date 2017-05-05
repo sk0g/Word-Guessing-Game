@@ -1,11 +1,18 @@
-# Safely try to open a file, and print an error message if unsuccessful
-def FileOpen(name):
+def file_open(name):
     try:
         f = open(name, 'r')
         return f
     except IOError:
-        print("Error: File does not exist, or is not called " + name)
+        print("Error: " + name + " not found")
         return 0
+
+
+def file_process(f):
+    word_list = []
+    for word in f:
+        word.strip()
+        word_list.append(word)
+    return word_list
 
 
 def integer_in(length_list, statement):
@@ -21,24 +28,29 @@ def integer_in(length_list, statement):
             return a
 
 
-def generate_len_list(f):
+def generate_len_list(word_list):
     length_list = []
-    for word in f:
-        f_length = len(f)
-        if f_length not in length_list:
-            length_list.append(f_length)
+    for word in word_list:
+        word_length = len(word)
+        if word_length not in length_list:
+            length_list.append(word_length)
     return length_list
 
 
-f = FileOpen('dictionary.txt')
-length_list = generate_len_list(f)
+dictionary_file = file_open('dictionary.txt')
+word_list = file_process(dictionary_file)
+length_list = generate_len_list(word_list)
 
+guesses_num = int(input('How many guesses would you like?'))
 replay = True
 while replay:
     word_length = integer_in(length_list, "What should your word length be?")
     word_hint = eval(input('Do you want to see the running total of remaining valid guesses?\
                             1 for yes, 0 for no.'))
-    valid_words = [word for word in f if len(word) == word_length]
+    valid_words = [word for word in word_list if len(word) == word_length]
+    
+    guessed_chars = []
+    
 
     replay = eval(input('Would you like to play another game\
                         1 for yes, 0 for no.'))
