@@ -28,6 +28,14 @@ def integer_in(length_list, statement):
             return a
 
 
+def char_in(guessed_chars):
+    while True:
+        c = input('Please enter your next character:')
+        if len(c) == 1 and 'A' <= c <= 'z' and c not in guessed_chars:
+            return(c.lower())
+        else:
+            continue
+
 def generate_len_list(word_list):
     length_list = []
     for word in word_list:
@@ -48,9 +56,10 @@ while replay:
     word_hint = eval(input('Do you want to see the running total of remaining valid guesses?\
                             1 for yes, 0 for no.'))
     valid_words = [word for word in word_list if len(word) == word_length]
-    
     guessed_chars = []
-    
+    for i in range(guesses_num):
+        guess_char = char_in(guessed_chars)
+
 
     replay = eval(input('Would you like to play another game\
                         1 for yes, 0 for no.'))
