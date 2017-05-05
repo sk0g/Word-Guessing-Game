@@ -36,6 +36,7 @@ def char_in(guessed_chars):
         else:
             continue
 
+
 def generate_len_list(word_list):
     length_list = []
     for word in word_list:
@@ -56,10 +57,15 @@ while replay:
     word_hint = eval(input('Do you want to see the running total of remaining valid guesses?\
                             1 for yes, 0 for no.'))
     valid_words = [word for word in word_list if len(word) == word_length]
-    guessed_chars = []
+    guessed_chars_list = []
     for i in range(guesses_num):
-        guess_char = char_in(guessed_chars)
+        char_guess = char_in(guessed_chars_list)
+        guessed_chars_list.append(char_guess)
 
+        print('You have', guesses_num - i, 'guesses remaining.\n')
+        if word_hint:
+            pass
+            # print valid guesses left
 
     replay = eval(input('Would you like to play another game\
                         1 for yes, 0 for no.'))
