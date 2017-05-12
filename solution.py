@@ -11,7 +11,8 @@ def file_process(f):
     word_list = []
     for word in f:
         word.strip()
-        word_list.append(word)
+        if not word_has_dupes(word):
+            word_list.append(word)
     return word_list
 
 
@@ -37,6 +38,16 @@ def char_in():
             continue
 
 
+def word_has_dupes(word):
+    lgt = len(word)
+    for i in range(lgt-1):
+        c = word[i]
+        for j in range(i+1, lgt):
+            if word[j] == c:
+                return True
+    return False
+
+
 def get_word_lengths(word_list):
     length_list = []
     for word in word_list:
@@ -44,6 +55,10 @@ def get_word_lengths(word_list):
         if word_length not in length_list:
             length_list.append(word_length)
     return length_list
+
+
+def get_biggest_category(guess_char, word_list):
+    pass
 
 
 dictionary_file = file_open('dictionary.txt')
