@@ -28,16 +28,16 @@ def integer_in(length_list, statement):
             return a
 
 
-def char_in(guessed_chars):
+def char_in():
     while True:
         c = input('Please enter your next character:')
-        if len(c) == 1 and 'A' <= c <= 'z' and c not in guessed_chars:
+        if len(c) == 1 and 'A' <= c <= 'z':
             return(c.lower())
         else:
             continue
 
 
-def generate_len_list(word_list):
+def get_word_lengths(word_list):
     length_list = []
     for word in word_list:
         word_length = len(word)
@@ -48,19 +48,17 @@ def generate_len_list(word_list):
 
 dictionary_file = file_open('dictionary.txt')
 word_list = file_process(dictionary_file)
-length_list = generate_len_list(word_list)
+word_lengths = get_word_lengths(word_list)
 
 guesses_num = int(input('How many guesses would you like?'))
 replay = True
 while replay:
-    word_length = integer_in(length_list, "What should your word length be?")
+    word_length = integer_in(word_lengths, "What should your word length be?")
     word_hint = eval(input('Do you want to see the running total of remaining valid guesses?\
                             1 for yes, 0 for no.'))
     valid_words = [word for word in word_list if len(word) == word_length]
-    guessed_chars_list = []
     for i in range(guesses_num):
-        char_guess = char_in(guessed_chars_list)
-        guessed_chars_list.append(char_guess)
+        char_guess = char_in()
 
         print('You have', guesses_num - i, 'guesses remaining.\n')
         if word_hint:
