@@ -1,3 +1,5 @@
+from collections import Counter
+
 def file_open(name):
     try:
         f = open(name, 'r')
@@ -58,7 +60,13 @@ def get_word_lengths(word_list):
 
 
 def get_biggest_category(guess_char, word_list):
-    pass
+    occurences_list = [word.find(guess_char) for word in word_list]
+    count = Counter(occurences_list)
+    most_common = count[0][0]
+
+    ls = [word for word in word_list if word.find(guess_char) == most_common]
+    return ls
+    
 
 
 dictionary_file = file_open('dictionary.txt')
