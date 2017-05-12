@@ -29,10 +29,10 @@ def integer_in(length_list, statement):
             return a
 
 
-def char_in():
+def char_in(used_words_list):
     while True:
         c = input('Please enter your next character:')
-        if len(c) == 1 and 'A' <= c <= 'z':
+        if len(c) == 1 and 'A' <= c <= 'z' and c not in used_words_list:
             return(c.lower())
         else:
             continue
@@ -72,8 +72,10 @@ while replay:
     word_hint = eval(input('Do you want to see the running total of remaining valid guesses?\
                             1 for yes, 0 for no.'))
     valid_words = [word for word in word_list if len(word) == word_length]
+    used_words_list = []
     for i in range(guesses_num):
-        char_guess = char_in()
+        char_guess = char_in(used_words_list)
+        used_words_list.append(char_guess)
 
         print('You have', guesses_num - i, 'guesses remaining.\n')
         if word_hint:
