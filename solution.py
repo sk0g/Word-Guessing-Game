@@ -83,18 +83,24 @@ while replay:
     word_hint = eval(input('Do you want to see the running total of remaining valid guesses?\
                             1 for yes, 0 for no.'))
     valid_words = [word for word in word_list if len(word) == word_length]
-    display_word = "-" * word_length
+    display_word = ["-"] * word_length
 
+    guessed_chars = []
     used_words_list = []
     for i in range(guesses_num):
         char_guess = char_in(used_words_list)
+        guessed_chars.append(char_guess)
         used_words_list.append(char_guess)
         (valid_words, index) = get_biggest_category(char_guess)
+        if index <= word_length:
+            display_word[i] = char_guess
+            print("The letter was found at position number: ", index+1)
+            print("Your current word is: "".join(display_word))
+            print("You have guessed the following letters:", guessed_chars)
 
         print('You have', guesses_num - i, 'guesses remaining.\n')
         if word_hint:
             print(len(valid_words))
-
 
     replay = eval(input('Would you like to play another game\
                         1 for yes, 0 for no.'))
