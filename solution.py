@@ -1,5 +1,3 @@
-from collections import Counter
-
 def file_open(name):
     try:
         f = open(name, 'r')
@@ -60,13 +58,18 @@ def get_word_lengths(word_list):
 
 
 def get_biggest_category(guess_char, word_list):
-    occurences_list = [word.find(guess_char) for word in word_list]
-    count = Counter(occurences_list)
-    most_common = count[0][0]
-
+    word_len = len(word_list[0]) + 1
+    occurences_list = [0] * word_len
+    for word in word_list:
+        num = word.find(guess_char)
+        occurences_list[num] += 1
+    most_common, highest_val = 0, 0
+    for i in range(word_len):  # Find the most common length
+        if occurences_list[i] > highest_val:
+            highest_val = occurences_list[i]
+            most_common = i
     ls = [word for word in word_list if word.find(guess_char) == most_common]
-    return ls
-    
+    return (ls, most_common)
 
 
 dictionary_file = file_open('dictionary.txt')
@@ -80,15 +83,18 @@ while replay:
     word_hint = eval(input('Do you want to see the running total of remaining valid guesses?\
                             1 for yes, 0 for no.'))
     valid_words = [word for word in word_list if len(word) == word_length]
+    display_word = "-" * word_length
+
     used_words_list = []
     for i in range(guesses_num):
         char_guess = char_in(used_words_list)
         used_words_list.append(char_guess)
+        (valid_words, index) = get_biggest_category(char_guess)
 
         print('You have', guesses_num - i, 'guesses remaining.\n')
         if word_hint:
-            pass
-            # print valid guesses left
+            print(len(valid_words))
+
 
     replay = eval(input('Would you like to play another game\
                         1 for yes, 0 for no.'))
