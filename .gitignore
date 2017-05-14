@@ -137,3 +137,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+.idea/inspectionProfiles/profiles_settings.xml
+*.xml
+.idea/Word-Guessing-Game.iml
