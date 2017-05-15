@@ -1,3 +1,5 @@
-A word guessing game to be built in Python
+A word guessing game built in Python
 
-Group Assignment for Griffith University's 2807ICT course
+Done for an assigment in 2807ICT at Griffith University
+
+Also known as 'Cruel Hangman'
