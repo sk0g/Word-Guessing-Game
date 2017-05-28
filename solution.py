@@ -32,10 +32,10 @@ def integer_in(length_list, statement):
             return a
 
 
-def char_in(used_words_list):
+def char_in(guessed_chars):
     while True:
         c = input('Please enter your next character:')
-        if len(c) == 1 and 'A' <= c <= 'z' and c not in used_words_list:
+        if len(c) == 1 and 'A' <= c <= 'z' and c not in guessed_chars:
             return(c.lower())
         else:
             continue
@@ -94,16 +94,14 @@ def game_process():
     display_word = ["-"] * word_length
 
     guessed_chars = []
-    used_words_list = []
     won = False
     while guesses_num:
         if won:
             break
         else:
             print("You have", guesses_num, "guesses remaining. \n \n")
-        char_guess = char_in(used_words_list)
+        char_guess = char_in(guessed_chars)
         guessed_chars.append(char_guess)
-        used_words_list.append(char_guess)
         index = get_biggest_category_index(char_guess, valid_words)
         valid_words = get_biggest_category_wordlist(valid_words, char_guess, index)
         if 0 <= index < word_length:
@@ -134,5 +132,3 @@ while replay:
     game_process()
     replay = eval(input('Would you like to play another game\
                         \n1 for yes, 0 for no. '))
-
-

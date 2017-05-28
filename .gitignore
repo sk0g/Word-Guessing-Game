@@ -140,3 +140,7 @@ $RECYCLE.BIN/
 .idea/inspectionProfiles/profiles_settings.xml
 *.xml
 .idea/Word-Guessing-Game.iml
+
+# Report file
+*.doc
+*.docx
